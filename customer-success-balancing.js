@@ -27,9 +27,8 @@ function customerSuccessBalancing(
   if(customerSuccessVerify.score === customerLast.score)
     return customerSuccessVerify.id;
 
-  var maxCounter = 0;
-
   //4- Percorrer todos os clientes encontrar o primeiro com o maior ou igual score, adicionar contador
+  var maxCounter = 0;
   customers.forEach(function(customer) {
     const customerSuccessFound = customerSuccess.find(element => element.score >= customer.score);
     if (customerSuccessFound) {
