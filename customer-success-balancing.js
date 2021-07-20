@@ -27,6 +27,8 @@ function customerSuccessBalancing(
   if(customerSuccessVerify.score === customerLast.score)
     return customerSuccessVerify.id;
 
+  var maxCounter = 0;
+
   //4- Percorrer todos os clientes encontrar o primeiro com o maior ou igual score, adicionar contador
   customers.forEach(function(customer) {
     const customerSuccessFound = customerSuccess.find(element => element.score >= customer.score);
@@ -35,26 +37,15 @@ function customerSuccessBalancing(
         customerSuccessFound.counter = 0;
       
       customerSuccessFound.counter += 1;
+      if(customerSuccessFound.counter > maxCounter) {
+        maxCounter = customerSuccessFound.counter;
+      }
     }
   });
 
-  //5- Filtrar todos os gerentes que tem contador e ordernar pelo contador
-  const compareObjects = (a, b) => (a.counter > b.counter) ? 1 : -1;
-  customerSuccess = customerSuccess.filter(key => key.counter !== undefined).sort(compareObjects);
-
-  //6- Verificar se encontrou algum gerente, se não encontrar retornar empate
-  if(customerSuccess.length === 0)
-    return 0;
-    
-  //7- Obter o penultimo gerente (se existir) e o último gerente  
-  const customerSuccessPenultimate = customerSuccess[customerSuccess.length - 2];
-  const customerSuccessLast = customerSuccess[customerSuccess.length - 1];
-
-  //8- Verificar se houve empate entre o peultimo e ultimo gerente
-  var tieValue = customerSuccessPenultimate !== undefined && customerSuccessPenultimate.counter === customerSuccessLast.counter;
-  
-  //9- Se houver empate, retornar 0, caso contrário retornar o ID do último gerente com Score maior
-  return tieValue ? 0 : customerSuccessLast.id;
+  //5- Retorna customer encontrado, caso for igual a 1, senão retorna 0
+  const customersFound = customerSuccess.filter(val => val.counter === maxCounter);
+  return customersFound.length == 1 ? customersFound[0].id : 0;
 }
 
 
