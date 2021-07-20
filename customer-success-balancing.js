@@ -16,21 +16,22 @@ function customerSuccessBalancing(
    */
 
   //1- Atualizar gerentes somente com os disponiveis
-  customerSuccess = customerSuccess.filter(val => !customerSuccessAway.includes(val.id));
+  const availableCustomerSuccess  = customerSuccess.filter(val => !customerSuccessAway.includes(val.id));
 
   //2- Ordenar os gerentes success pelo nível dele
-  customerSuccess.sort((a, b) => (a.score > b.score) ? 1 : -1);
+  availableCustomerSuccess.sort((a, b) => (a.score > b.score) ? 1 : -1);
 
   //3- Verifica se score do ultimo gerente é o mesmo do ultimo cliente
-  var customerSuccessVerify = customerSuccess[customerSuccess.length - 1];
+  var customerSuccessVerify = availableCustomerSuccess[availableCustomerSuccess.length - 1];
   var customerLast = customers[customers.length - 1];
   if(customerSuccessVerify.score === customerLast.score)
     return customerSuccessVerify.id;
 
   //4- Percorrer todos os clientes encontrar o primeiro com o maior ou igual score, adicionar contador
   var maxCounter = 0;
+  let customerSuccessFound;
   customers.forEach(function(customer) {
-    const customerSuccessFound = customerSuccess.find(element => element.score >= customer.score);
+    customerSuccessFound = availableCustomerSuccess.find(element => element.score >= customer.score);
     if (customerSuccessFound) {
       if (customerSuccessFound.counter === undefined)
         customerSuccessFound.counter = 0;
@@ -43,7 +44,7 @@ function customerSuccessBalancing(
   });
 
   //5- Retorna customer encontrado, caso for igual a 1, senão retorna 0
-  const customersFound = customerSuccess.filter(val => val.counter === maxCounter);
+  const customersFound = availableCustomerSuccess.filter(val => val.counter === maxCounter);
   return customersFound.length == 1 ? customersFound[0].id : 0;
 }
 
