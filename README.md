@@ -23,6 +23,29 @@ Utilizado as seguintes linguagens abaixo:
 - JavaScript
 - Ruby
 
+## Dependências
+
+As dependências do front-end são gerenciadas utilizando o NPM ou Yarn.
+Além disso, o **Git** é utilizado como o sistema de controle de versão de arquivos.
+
+As instruções a seguir assumem que você utiliza o **Windows** como o sistema operacional.
+
+1. Instalar o Git
+
+    Para instalar o Git é necessário fazer o download do instalador [disponível aqui](https://git-for-windows.github.io/).
+    Utilizar as configurações padrão do instalador é a melhor opção.
+
+## Obter o projeto
+
+O projeto possui um repositório Git central no Github [disponível aqui](https://github.com/danielmeloramos/challenge.git).
+Através da linha de comando clone o repositório executando o seguinte comando:
+
+```bash
+> git clone https://github.com/danielmeloramos/challenge.git
+```
+
+Desta forma você baixará o repositório git para sua máquina local na pasta **challenge**.
+
 ## Caminho dos projetos:
 
 * Os códigos em GO se encontram em **/go**
